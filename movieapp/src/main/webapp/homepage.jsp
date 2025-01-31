@@ -146,7 +146,7 @@ body {
             <h1>Movies</h1>
             <div class="card-container">
                 <%
-                    ArrayList<Movie> movieList = (ArrayList<Movie>) request.getAttribute("movieList");
+                ArrayList<Movie> movieList = (ArrayList<Movie>) request.getAttribute("movieList");
                     if (movieList != null) {
                         for (Movie movie : movieList) {
                 %>
