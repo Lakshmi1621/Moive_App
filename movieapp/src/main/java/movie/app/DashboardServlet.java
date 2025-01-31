@@ -1,5 +1,6 @@
 package movie.app;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -8,82 +9,60 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Cookie;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Servlet implementation class DashboardServlet
  */
-@WebServlet("/dashboard")
+@WebServlet("movie.app/dashboard/movieinfo.jsp")
 public class DashboardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     
 	private ArrayList<Movie> movieList = new ArrayList<>();
 
-	public void init() throws ServletException {
-		movieList.add(new Movie(
-				"https://i.pinimg.com/originals/c1/e6/dd/c1e6dd4b83c709fc4887b061d8f3a623.jpg",
-				"Darling", "10/10", "2021", 1.30));
-		movieList.add(new Movie(
-				"https://assets.gadgets360cdn.com/pricee/assets/product/202206/Sita-Ramam-poster_1656325728.jpg",
-				"Sita Ramam", "10/10", "2022", 2.30));
-		movieList.add(
-				new Movie("https://tse1.mm.bing.net/th?id=OIP.GTbSOd1XuxecTy8tuivxlAHaEK&pid=Api&P=0&h=180",
-						"Malli Malli Idi Rani Roju", "9/10", "2015", 2.00));
-		movieList.add(new Movie(
-				"https://assets.gadgets360cdn.com/pricee/assets/product/202311/Kung-Fu-Panda-4-Poster_1700827659.jpg",
-				"Mr Perfect", "8/10", "2018", 1.30));
-		movieList.add(new Movie(
-				"https://tse3.mm.bing.net/th?id=OIP.0ZTBIsTccUV0F6eh7T_yJAHaE8&pid=Api&P=0&h=180",
-				"Baby", "7/10", "2020", 1.30));
-		movieList.add(new Movie(
-				"https://tse1.mm.bing.net/th?id=OIP.uQIjaRimnLsHOFsb3sm5PwAAAA&pid=Api&P=0&h=180",
-				"Geetha Govindam", "10/10", "2020", 1.30));
-		movieList.add(
-				new Movie("https://tse3.mm.bing.net/th?id=OIP.l5Jxnl2GQWnXBE-7LtT8lwAAAA&pid=Api&P=0&h=180", "Jersey", "8/10", "2019", 1.30));
-		movieList.add(new Movie(
-				"https://tse3.mm.bing.net/th?id=OIP.1DFC10Fa8LEh1iZa6mYnlwHaEU&pid=Api&P=0&h=180",
-				"#Bro", "8/10", "2019", 1.30));
-		movieList.add(new Movie(
-				"https://timesofindia.indiatimes.com/thumb/msid-62752844,width-800,height-600,resizemode-4/62752844.jpg",
-				"Chalo", "8/10", "2018", 2.00));
-		movieList.add(new Movie(
-				"https://static.toiimg.com/photo/105240225.cms",
-				"Joe", "7/10", "2023", 2.00));
-		movieList.add(new Movie(
-				"https://tse3.mm.bing.net/th?id=OIP.-ODpBLDd5tx9PxWpIb50FgHaIF&pid=Api&P=0&h=180",
-				"SankranthikiVasthunam", "10/10", "2025", 1.30));
-		movieList.add(new Movie(
-				"https://tse2.mm.bing.net/th?id=OIP.skmYKsVV0sr3JQ_YgPuN4QHaMC&pid=Api&P=0&h=180",
-				"K.G.F", "9/10", "2019", 2.30));
-	}
-
+	
 
 	
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		boolean isAuthenticated = false;
-		Cookie[] cookies = request.getCookies();
-
-		if (cookies != null) {
-			for (Cookie cookie : cookies) {
-				if ("user".equals(cookie.getName())) {
-					isAuthenticated = true;
-					break;
-				}
-			}
-		}
-
-		if (!isAuthenticated) {
-			response.getWriter().println("Not authenticated. Redirecting to login...");
-			response.sendRedirect("index.html");
-			return;
-		}
 		
-		request.setAttribute("movieList", movieList);
-	    request.getRequestDispatcher("homepage.jsp").forward(request, response);
-
+		 List<Movie> movieList = new ArrayList<>();
+		 movieList.add(new Movie("https://wallpaperaccess.com/full/1732928.jpg","Darling","10/10","2019","2.30", 1));
+			movieList.add(new Movie("https://assets.gadgets360cdn.com/pricee/assets/product/202206/Sita-Ramam-poster_1656325728.jpg","Sita Ramam","10/10","2012","2.30", 2));
+			movieList.add(new Movie("https://tse1.mm.bing.net/th?id=OIP.GTbSOd1XuxecTy8tuivxlAHaEK&pid=Api&P=0&h=180","Malli Malli Idi Rani Roju","9/10","2015","3.30", 3));
+			movieList.add(new Movie("https://lh4.googleusercontent.com/-RCKpVLes-ck/TYhxOGCXi4I/AAAAAAAACiU/dVdhAoJKRKs/s1600/mrperfect2.jpg","Mr Perfect", "8/10", "2018","1.30",4));
+			movieList.add(new Movie(
+					"https://tse3.mm.bing.net/th?id=OIP.0ZTBIsTccUV0F6eh7T_yJAHaE8&pid=Api&P=0&h=180",
+					"Baby", "7/10", "2020"," 1.30",5));
+			movieList.add(new Movie(
+					"https://tse1.mm.bing.net/th?id=OIP.uQIjaRimnLsHOFsb3sm5PwAAAA&pid=Api&P=0&h=180",
+					"Geetha Govindam", "10/10", "2020"," 1.30",6));
+			movieList.add(
+					new Movie("https://tse3.mm.bing.net/th?id=OIP.l5Jxnl2GQWnXBE-7LtT8lwAAAA&pid=Api&P=0&h=180", "Jersey", "8/10", "2019", "1.30",7));
+			movieList.add(new Movie(
+					"https://tse3.mm.bing.net/th?id=OIP.1DFC10Fa8LEh1iZa6mYnlwHaEU&pid=Api&P=0&h=180",
+					"#Bro", "8/10", "2019",  "1.30",8));
+			movieList.add(new Movie(
+					"https://timesofindia.indiatimes.com/thumb/msid-62752844,width-800,height-600,resizemode-4/62752844.jpg",
+					"Chalo", "8/10", "2018"," 2.00",9));
+			movieList.add(new Movie(
+					"https://static.toiimg.com/photo/105240225.cms",
+					"Joe", "7/10", "2023", "2.00",10));
+			movieList.add(new Movie(
+					"https://tse3.mm.bing.net/th?id=OIP.-ODpBLDd5tx9PxWpIb50FgHaIF&pid=Api&P=0&h=180",
+					"SankranthikiVasthunam", "10/10", "2025", " 1.30",11));
+			movieList.add(new Movie(
+					"https://tse2.mm.bing.net/th?id=OIP.skmYKsVV0sr3JQ_YgPuN4QHaMC&pid=Api&P=0&h=180",
+					"K.G.F", "9/10", "2019",  "2.30",12));
+		 getServletContext().setAttribute("movieList", movieList);
+		 RequestDispatcher dispatcher = request.getRequestDispatcher("/dashboard.jsp");
+	        dispatcher.forward(request, response);
+	    }
+	
+	    
 //		StringBuffer html = new StringBuffer();
 //
 //		html.append("<!DOCTYPE html>\r\n" + "<html lang=\"en\">\r\n" + "\r\n" + "<head>\r\n"
@@ -240,4 +219,10 @@ public class DashboardServlet extends HttpServlet {
 //
 //response.getWriter().print(html.toString());
 }
-}
+
+
+	
+
+
+
+
